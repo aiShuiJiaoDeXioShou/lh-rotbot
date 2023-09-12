@@ -1,5 +1,6 @@
 package linghe.rotbot.robot;
 
+import javafx.scene.paint.Color;
 import linghe.rotbot.comm.Config;
 import linghe.rotbot.comm.MD5Utils;
 import net.sourceforge.tess4j.ITesseract;
@@ -26,25 +27,28 @@ public class LhRobot {
     // 识别文本
     public static ITesseract tesseract;
     public static int delay = 100;
-    static  {
+
+    static {
         try {
             bot = new Robot();
-        } catch (AWTException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     /**
      * 将鼠标移动到指定位置
+     *
      * @param x x坐标的位置
      * @param y y坐标的位置
      */
-    public static void move(int x,int y) {
+    public static void move(int x, int y) {
         bot.mouseMove(x, y);
     }
 
     /**
      * 将鼠标移动到指定位置
+     *
      * @param point 鼠标移动的位置
      */
     public static void move(Point point) {
@@ -53,13 +57,14 @@ public class LhRobot {
 
     /**
      * 将鼠标移动到指定位置,并按下,inputEvent设置是左键位还是右键位
-     * @param x 鼠标按下的位置
-     * @param y 鼠标按下的位置
-     * @param delay 按下松开的间隔时间
+     *
+     * @param x          鼠标按下的位置
+     * @param y          鼠标按下的位置
+     * @param delay      按下松开的间隔时间
      * @param inputEvent 设置鼠标按下的是左键位还是右键位
      */
-    public static void click(int x, int y, int delay,int inputEvent) {
-        bot.mouseMove(x,y);
+    public static void click(int x, int y, int delay, int inputEvent) {
+        bot.mouseMove(x, y);
         // 按下鼠标左键
         bot.mousePress(inputEvent);
         bot.delay(delay);
@@ -68,52 +73,57 @@ public class LhRobot {
     }
 
     /**
-     *
      * 将鼠标移动到指定位置,并按下,inputEvent设置是左键位还是右键位
-     * @param x 鼠标按下的位置
-     * @param y 鼠标按下的位置
+     *
+     * @param x     鼠标按下的位置
+     * @param y     鼠标按下的位置
      * @param delay 按下松开的间隔时间
      */
-    public static void click(int x, int y,int delay) {
+    public static void click(int x, int y, int delay) {
         click(x, y, delay, InputEvent.BUTTON1_MASK);
     }
 
     /**
      * 将鼠标移动到指定位置,并按下 默认是左键位
+     *
      * @param x 鼠标按下的位置
      * @param y 鼠标按下的位置
      */
     public static void click(int x, int y) {
-        click(x,y, delay,InputEvent.BUTTON1_MASK);
+        click(x, y, delay, InputEvent.BUTTON1_MASK);
     }
 
     /**
      * 按下鼠标右键
+     *
      * @param x 鼠标按下的位置
      * @param y 鼠标按下的位置
      */
     public static void rightClick(int x, int y) {
-        click(x,y, delay,InputEvent.BUTTON3_MASK);
+        click(x, y, delay, InputEvent.BUTTON3_MASK);
     }
 
     /**
      * 按下鼠标右键
+     *
      * @param point 鼠标按下的位置
      */
     public static void rightClick(Point point) {
-        click(point.x,point.y, delay,InputEvent.BUTTON3_MASK);
+        click(point.x, point.y, delay, InputEvent.BUTTON3_MASK);
     }
 
     /**
      * 按下鼠标左键
+     *
      * @param point 鼠标按下的位置
      */
     public static void click(Point point) {
-        click(point.x,point.y, delay,InputEvent.BUTTON3_MASK);
+        click(point.x, point.y, delay, InputEvent.BUTTON3_MASK);
     }
 
     /**
      * 获取现在鼠标的位置
+     *
      * @return 坐标位置
      */
     public static Point getMousePosition() {
@@ -122,10 +132,11 @@ public class LhRobot {
 
     /**
      * 按下指定键,并松开,delay是按键的间隔时间
+     *
      * @param keyCode the key code
-     * @param delay the delay
+     * @param delay   the delay
      */
-    public static void key(int keyCode,int delay) {
+    public static void key(int keyCode, int delay) {
         bot.keyPress(keyCode);
         bot.delay(delay);
         bot.keyRelease(keyCode);
@@ -133,6 +144,7 @@ public class LhRobot {
 
     /**
      * 按下指定键,并松开,delay是按键的间隔时间
+     *
      * @param keyCode the key code
      */
     public static void key(int keyCode) {
@@ -142,7 +154,7 @@ public class LhRobot {
     /**
      * 封装快捷键指令,同时按下两个按键
      */
-    public static void keyTwo(int keyCode,int keyCode2) {
+    public static void keyTwo(int keyCode, int keyCode2) {
         bot.keyPress(keyCode);
         bot.keyPress(keyCode2);
         bot.delay(delay);
@@ -153,7 +165,7 @@ public class LhRobot {
     /**
      * 封装快捷键指令,同时按下三个按键
      */
-    public static void keyThree(int keyCode,int keyCode2,int keyCode3) {
+    public static void keyThree(int keyCode, int keyCode2, int keyCode3) {
         bot.keyPress(keyCode);
         bot.keyPress(keyCode2);
         bot.keyPress(keyCode3);
@@ -165,6 +177,7 @@ public class LhRobot {
 
     /**
      * 截取指定区域
+     *
      * @param rectangle 保存位置
      * @return Java图片流
      */
@@ -175,6 +188,7 @@ public class LhRobot {
 
     /**
      * 截取全屏并保存为java图片流
+     *
      * @return 返回图片流
      */
     public static BufferedImage capture() {
@@ -189,6 +203,7 @@ public class LhRobot {
 
     /**
      * 截取全屏并保存到指定路径
+     *
      * @param path 保存位置
      */
     public static void capture(String path) {
@@ -204,6 +219,7 @@ public class LhRobot {
 
     /**
      * 截取全屏并保存到指定文件
+     *
      * @param file 保存的文件
      */
     public static void capture(File file) {
@@ -219,8 +235,9 @@ public class LhRobot {
 
     /**
      * 截取指定区域,并保存到指定位置
+     *
      * @param rectangle 截取区域
-     * @param path 保存位置
+     * @param path      保存位置
      */
     public static void capture(Rectangle rectangle, String path) {
         //从x坐标为0，y坐标为0的位置开始截取（左上角）
@@ -235,8 +252,9 @@ public class LhRobot {
 
     /**
      * 截取指定区域,并保存到指定文件
+     *
      * @param rectangle 截取区域
-     * @param file 保存位置
+     * @param file      保存位置
      */
     public static void capture(Rectangle rectangle, File file) {
         //从x坐标为0，y坐标为0的位置开始截取（左上角）
@@ -250,7 +268,7 @@ public class LhRobot {
     }
 
     /**
-     * @param sourceSrc 源文件
+     * @param sourceSrc   源文件
      * @param templateSrc 目标文件
      */
     public static Point findImagePoint(String sourceSrc, String templateSrc) {
@@ -272,6 +290,7 @@ public class LhRobot {
 
     /**
      * 查找指定文件在屏幕中的位置
+     *
      * @param filePath 查找文件的路径
      * @return 该文件所在坐标
      */
@@ -279,7 +298,7 @@ public class LhRobot {
         // 使用MD5计算唯一值
         String md5 = MD5Utils.md5DigestAsHex(filePath);
         // 截取全屏
-        File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") +"/"+md5, ".png");
+        File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") + "/" + md5, ".png");
         capture(tempFile);
         if (tempFile.exists()) {
             return findImagePoint(tempFile.getAbsolutePath(), filePath);
@@ -289,6 +308,7 @@ public class LhRobot {
 
     /**
      * 查找指定文件在屏幕中的位置,这个根据图标的中心点计算
+     *
      * @param filePath 查找文件的路径
      * @return 该文件所在坐标
      */
@@ -296,7 +316,7 @@ public class LhRobot {
         // 使用MD5计算唯一值
         String md5 = MD5Utils.md5DigestAsHex(filePath);
         // 截取全屏
-        File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") +"/"+md5, ".png");
+        File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") + "/" + md5, ".png");
         capture(tempFile);
         if (tempFile.exists()) {
             Size imageSize = getImageSize(filePath);
@@ -348,6 +368,7 @@ public class LhRobot {
 
     /**
      * 创建临时文件
+     *
      * @param prefix 前缀名
      * @param suffix 文件后缀名
      * @return 该文件对象
@@ -365,6 +386,7 @@ public class LhRobot {
 
     /**
      * 提取指定图片的文字
+     *
      * @param file 文件路径
      * @return 识别的文本
      */
@@ -381,6 +403,7 @@ public class LhRobot {
 
     /**
      * 提取指定图片的文字
+     *
      * @param path 文件路径
      * @return 识别的文本
      */
@@ -390,6 +413,7 @@ public class LhRobot {
 
     /**
      * 提取指定区域的文字
+     *
      * @param rectangle 区域范围
      * @return 识别的文本
      */
@@ -398,7 +422,7 @@ public class LhRobot {
         // 使用MD5计算唯一值
         String md5 = MD5Utils.md5DigestAsHex(rectangle.toString() + rectangle.width + rectangle.height);
         // 截取全屏
-        File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") +"/"+md5, ".png");
+        File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") + "/" + md5, ".png");
         // 根据区域获取文件
         capture(rectangle, tempFile);
         if (tempFile.exists()) {
@@ -409,6 +433,7 @@ public class LhRobot {
 
     /**
      * 寻找到某张图片进行点击
+     *
      * @param file 文件路径
      */
     public static void clickForImage(File file) {
@@ -420,6 +445,7 @@ public class LhRobot {
 
     /**
      * 寻找到某张图片进行点击
+     *
      * @param path 文件路径
      */
     public static void clickForImage(String path) {
@@ -431,6 +457,7 @@ public class LhRobot {
 
     /**
      * 移动到某张图片进行点击
+     *
      * @param file 文件路径
      */
     public static void moveForImage(File file) {
@@ -442,6 +469,7 @@ public class LhRobot {
 
     /**
      * 移动到某张图片进行点击
+     *
      * @param path 文件路径
      */
     public static void moveForImage(String path) {
@@ -453,7 +481,8 @@ public class LhRobot {
 
     /**
      * 模拟电脑拖拽操作
-     * @param point 移动到进行拖拽的地方
+     *
+     * @param point  移动到进行拖拽的地方
      * @param point2 拖拽目的地
      */
     public static void drag(Point point, Point point2) {
@@ -465,6 +494,7 @@ public class LhRobot {
 
     /**
      * 模拟电脑拖拽操作
+     *
      * @param point 拖拽目的地
      */
     public static void drag(Point point) {
@@ -475,6 +505,7 @@ public class LhRobot {
 
     /**
      * 向着y轴方向拖拽多少
+     *
      * @param y 移动距离
      */
     public static void dragY(int y) {
@@ -487,6 +518,7 @@ public class LhRobot {
 
     /**
      * 向着x轴方向拖拽多少
+     *
      * @param x 移动距离
      */
     public static void dragX(int x) {
@@ -495,6 +527,39 @@ public class LhRobot {
         position.x += x;
         move(position);
         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    }
+
+    /**
+     * 判断指定位置是不是指定的颜色
+     *
+     * @param x x坐标位置
+     * @param y y坐标位置
+     * @return bool
+     */
+    public static boolean isColor(int x, int y, Color color) {
+        return getColor(x, y).equals(color);
+    }
+
+    /**
+     * 获取指定位置的颜色
+     *
+     * @param x x坐标位置
+     * @param y y坐标位置
+     */
+    public static Color getColor(int x, int y) {
+        // 创建临时文件
+        // 截取全屏
+        File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") + "/tempFile", ".png");
+        capture(tempFile);
+        Mat imread = imread(tempFile.getAbsolutePath());
+        Mat dst = new Mat(imread.cols(), imread.rows(), CvType.CV_8UC4);
+        Imgproc.cvtColor(imread, dst, Imgproc.COLOR_BGR2BGRA);
+        double b = dst.get(y, x)[0];
+        double g = dst.get(y, x)[1];
+        double r = dst.get(y, x)[2];
+        double a = dst.get(y, x)[3];
+        Color color = new Color((float) r / 255, (float) g / 255, (float) b / 255, (float) a / 255);
+        return color;
     }
 
 }

@@ -24,4 +24,10 @@ public class LhRobotTest {
     public void 拖拽() {
         dragY(100);
     }
+
+    @Test
+    public void 验证颜色() {
+
+    }
+
 }

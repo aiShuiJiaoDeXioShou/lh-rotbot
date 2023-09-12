@@ -26,7 +26,6 @@ public class Config {
     }
 
     public static URL url(String name) {
-        // 截取前面的file:/
         return Objects.requireNonNull(Config.class.getClassLoader().getResource(name));
     }
 
