@@ -2,9 +2,7 @@ package linghe.rotbot;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
-import linghe.rotbot.listener.GlobalKeyListener;
 import linghe.rotbot.listener.GlobalListener;
-import linghe.rotbot.service.RobotService;
 
 import java.net.URL;
 
