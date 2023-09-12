@@ -1,6 +1,5 @@
 package linghe.rotbot.robot;
 
-import javafx.scene.paint.Color;
 import linghe.rotbot.comm.Config;
 import linghe.rotbot.comm.MD5Utils;
 import net.sourceforge.tess4j.ITesseract;
@@ -551,15 +550,19 @@ public class LhRobot {
         // 截取全屏
         File tempFile = createTempFile(Config.INSTANCE.getProperty("CachePath") + "/tempFile", ".png");
         capture(tempFile);
-        Mat imread = imread(tempFile.getAbsolutePath());
-        Mat dst = new Mat(imread.cols(), imread.rows(), CvType.CV_8UC4);
-        Imgproc.cvtColor(imread, dst, Imgproc.COLOR_BGR2BGRA);
+        Mat im = imread(tempFile.getAbsolutePath());
+        Mat dst = new Mat(im.cols(), im.rows(), CvType.CV_8UC4);
+        Imgproc.cvtColor(im, dst, Imgproc.COLOR_BGR2BGRA);
         double b = dst.get(y, x)[0];
         double g = dst.get(y, x)[1];
         double r = dst.get(y, x)[2];
         double a = dst.get(y, x)[3];
         Color color = new Color((float) r / 255, (float) g / 255, (float) b / 255, (float) a / 255);
         return color;
+    }
+
+    public static Color getRobotColor(int x, int y) {
+        return bot.getPixelColor(x, y);
     }
 
 }

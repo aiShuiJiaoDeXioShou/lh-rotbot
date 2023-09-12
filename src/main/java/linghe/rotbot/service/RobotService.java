@@ -139,6 +139,7 @@ public class RobotService {
         frame.setOpacity(0.01f);
         // frame 初始化的时候最大化
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.requestFocusInWindow();
         frame.setVisible(true);
     }
 

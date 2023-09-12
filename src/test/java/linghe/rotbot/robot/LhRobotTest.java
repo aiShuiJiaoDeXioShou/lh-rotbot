@@ -3,6 +3,7 @@ package linghe.rotbot.robot;
 import org.junit.Test;
 
 import java.awt.*;
+import java.net.URL;
 
 import static linghe.rotbot.robot.LhRobot.*;
 
@@ -27,7 +28,15 @@ public class LhRobotTest {
 
     @Test
     public void 验证颜色() {
+        URL url = ClassLoader.getSystemResource("lib/opencv_java480.dll");
+        System.load(url.getPath());
+        // 获取当前鼠标的坐标
+        Point mousePosition = getMousePosition();
 
+        Color color1 = new Color(95, 184, 101);
+        Color color = getRobotColor(mousePosition.x, mousePosition.y);
+        System.out.println(color);
+        System.out.println(color.equals(color1));
     }
 
 }
