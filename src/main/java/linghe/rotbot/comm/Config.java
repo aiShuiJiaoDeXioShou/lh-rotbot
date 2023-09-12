@@ -12,11 +12,13 @@ public class Config {
     static {
         // 读取配置文件中的值
         String config = src("config.groovy");
-        try (GroovyClassLoader classLoader = new GroovyClassLoader()) {
-            Class<?> groovyClass = classLoader.parseClass(new File(config));
-            INSTANCE = (GroovyObject) groovyClass.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (Objects.isNull(INSTANCE)) {
+            try (GroovyClassLoader classLoader = new GroovyClassLoader()) {
+                Class<?> groovyClass = classLoader.parseClass(new File(config));
+                INSTANCE = (GroovyObject) groovyClass.getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -26,7 +28,6 @@ public class Config {
     }
 
     public static URL url(String name) {
-        // 截取前面的file:/
         return Objects.requireNonNull(Config.class.getClassLoader().getResource(name));
     }
 
