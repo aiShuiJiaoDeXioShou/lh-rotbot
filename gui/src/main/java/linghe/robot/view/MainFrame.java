@@ -1,5 +1,6 @@
 package linghe.robot.view;
 
+import linghe.robot.comm.ViewConfig;
 import me.friwi.jcefmaven.CefAppBuilder;
 import me.friwi.jcefmaven.CefInitializationException;
 import me.friwi.jcefmaven.MavenCefAppHandlerAdapter;
@@ -62,9 +63,12 @@ public class MainFrame extends JFrame {
         });
         getContentPane().add(browerUI_, BorderLayout.CENTER);
         pack();
-        setSize(800, 600);
-        setVisible(true);
+        setSize(ViewConfig.WIDTH, ViewConfig.HEIGHT);
+        setTitle(ViewConfig.TITLE);
+        // 设置应用图标
+        setIconImage(ViewConfig.ICON.getImage());
         setLocationRelativeTo(null);
+        setVisible(true);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

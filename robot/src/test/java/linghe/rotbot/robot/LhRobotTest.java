@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.awt.*;
 import java.net.URL;
 
-import static linghe.rotbot.robot.LhRobot.*;
+import static linghe.robot.core.LhRobot.*;
+
 
 public class LhRobotTest {
 

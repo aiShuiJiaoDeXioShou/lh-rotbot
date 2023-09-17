@@ -9,7 +9,7 @@ import linghe.robot.view.MainFrame;
 public class Main {
     public static void main(String[] args) throws Exception {
         boolean useOsr = false;
-        new MainFrame(Config.src("view/html/MainView.html"), useOsr, false, args);
+        MainFrame mainFrame = new MainFrame(Config.src("web-ui/dist/index.html"), useOsr, false, args);
     }
 
     // 注册全局监听事件

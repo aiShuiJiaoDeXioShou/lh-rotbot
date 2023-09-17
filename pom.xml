@@ -11,6 +11,7 @@
     <modules>
         <module>robot</module>
         <module>gui</module>
+        <module>script</module>
     </modules>
 
     <properties>
